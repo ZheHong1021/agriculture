@@ -1,0 +1,149 @@
+body{
+	font-family: 'Montserrat', "微軟正黑體", sans-serif;
+	font-size: 16px;
+	overflow-x: hidden;
+}
+.carousel{
+	height: 500px;
+	width: 100%;
+}
+.carousel-item a img{
+	margin: auto;
+}
+
+a{
+	color: #5385C1;
+}
+
+.btn-primary{
+	background-color: #5385C1;
+	color: #FFF;
+}
+
+/* layout */
+#admin-navbar{
+	padding-top: 1rem; 
+	padding-bottom: 1rem;
+	padding-left: 2rem;
+	padding-right: 2rem;
+}
+
+#user-navbar{
+	padding-left: 2rem;
+	padding-right: 2rem;
+	border-bottom: 2px solid #F7F7F7;
+}
+
+#admin-main{
+	padding-left: 2rem;
+	padding-right: 2rem;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+}
+
+footer{
+	line-height: 60px;
+	height: 60px;
+	font-size: 0.8rem;
+}
+
+/* index */
+.list-session{
+	border: 2px solid #F7F7F7;
+	border-radius: 5px;
+	padding-top: 1rem; 
+	padding-bottom: 1rem;
+	padding-left: 2rem;
+	padding-right: 2rem;
+	margin-bottom: 1rem;
+}
+
+#addressBox{
+	background: #FFF;
+	border-radius: 4px;
+	margin-top: 50px;
+	z-index: +12;
+	position: fixed;
+}
+#addressTable{
+	border-top: 0px;
+}
+.data_geo_info{
+	display: none;
+}
+.modal-lg {
+    max-width: 80%;
+}
+
+.breadcrumb{
+	background-color: #FFF;
+}
+
+#map{
+	width: 100%;
+	text-align: center;
+	background-color: #DEE2E6;
+	height: 450px;
+	line-height: 450px;
+}
+
+#reportModal{
+	width: 90%;
+}
+
+.table-bordered .border-only-bottom th {
+	border: none !important; 
+	border-bottom: solid 1px #ccc !important;
+}
+
+#location-pop{
+	width: 200px;
+	font-size: 1rem;
+	padding-top: 1rem; 
+	padding-bottom: 1rem;
+	text-align: left;
+	font-family: 'Montserrat', "微軟正黑體", sans-serif;
+}
+
+#location-pop b{
+	font-weight: bold;
+}
+
+/* login */
+#loginPage{
+	background-image: url('../images/bg.jpg');
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
+	min-height: 100%;  
+	min-height: 100vh; 
+
+	/* 垂直置中 
+	display: flex;
+	align-items: center;*/
+}
+#loginBox{
+	background-color: #FFF;
+	border-radius: 4px;
+	padding: 2rem;
+	padding-left: 4rem;
+	padding-right: 4rem;
+}
+#loginBox input{
+	border: none;
+	border-radius: 0;
+	border-bottom: 2px solid #e0e0e0;
+}
+
+/* report */
+.report-section{
+	padding-top: 1rem; 
+	padding-bottom: 2rem;
+	padding-left: 4rem;
+	padding-right: 4rem;
+}
+
+/* admin report */
+.dropdown-no-icon .dropdown-toggle::after {
+    display:none;
+}
