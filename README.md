@@ -1,64 +1,75 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# 高科大農業環境資訊平台
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+從Github將 Laravel專案clone後如何重建
+[參考連結](https://campus-xoops.tn.edu.tw/modules/tad_book3/page.php?tbsn=37&tbdsn=1255)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+```cmd=
+// 先確認自己有沒有載 git
+git --version
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+// output: git version 2.24.0.windows.2 (這是我的的 git版本)
+```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+【載入專案】
+```cmd=
+git clone https://github.com/ZheHong1021/agriculture.git
 
-## Learning Laravel
+cd agriculture // 移動到該目錄下
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+composer install // composer重建相關套件，此時會重建vendor目裡的內容
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+npm install // 還原 npm所載的套件，node_modules
+```
 
-## Laravel Sponsors
+<br>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+【設定專案】
+```cmd=
+cp .env.example .env // 還原.env設定檔
+php artisan key:generate // 產生器來產生APP KEY
+```
 
-### Premium Partners
+<br>
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
+【設定資料庫】
+```php=
+// .env
+APP_NAME=Laravel
+APP_ENV=local
+APP_KEY=base64:DBkCQrH+eS0x7t4QYltnBWe+RF82Dtp9LMRvrS0wdkM=   // 產生器產生的結果(每個都不一樣)
+APP_DEBUG=true
+APP_URL=http://agriculture.test
 
-## Contributing
+LOG_CHANNEL=stack
+LOG_LEVEL=debug
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+DB_CONNECTION=sqlsrv  // 要使用的資料庫連線 (mysql、pgsql、sqlsrv)
+DB_HOST=DESKTOP-95GTT1R\SQLEXPRESS // 伺服器名稱(sqlsrv)
+DB_PORT=1433 // port(sqlsrv: 1433、 mysql: 3306)
+DB_DATABASE=agriculture // 資料庫名稱
+DB_USERNAME=sa // 使用者帳號
+DB_PASSWORD=haha45La // 使用者密碼
 
-## Code of Conduct
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+<br>
 
-## Security Vulnerabilities
+```php=
+// config/database.php
+'default' => env('DB_CONNECTION', 'sqlsrv'),  // sqlsrv可以改成其他的(看使用哪個資料庫連線)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+'sqlsrv' => [
+    'driver' => 'sqlsrv',
+    'url' => env('DATABASE_URL'),
+    'host' => env('DB_HOST', 'DESKTOP-95GTT1R\SQLEXPRESS'),  // MS SQL的伺服器密碼
+    'port' => env('DB_PORT', '1433'), // Port
+    'database' => env('DB_DATABASE', 'agriculture'), // 資料庫名稱
+    'username' => env('DB_USERNAME', 'sa'), // 使用者名稱
+    'password' => env('DB_PASSWORD', 'haha45La'), // 使用者密碼
+    'charset' => 'utf8',
+    'prefix' => '',
+    'prefix_indexes' => true,
+],
+```
