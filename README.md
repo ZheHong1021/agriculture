@@ -4,7 +4,7 @@
 從Github將 Laravel專案clone後如何重建
 [參考連結](https://campus-xoops.tn.edu.tw/modules/tad_book3/page.php?tbsn=37&tbdsn=1255)
 
-```bash=
+```bash
 // 先確認自己有沒有載 git
 git --version
 
@@ -12,7 +12,7 @@ git --version
 ```
 
 【載入專案】
-```bash=
+```bash
 git clone https://github.com/ZheHong1021/agriculture.git
 
 cd agriculture // 移動到該目錄下
@@ -25,7 +25,7 @@ npm install // 還原 npm所載的套件，node_modules
 <br>
 
 【設定專案】
-```bash=
+```bash
 cp .env.example .env // 還原.env設定檔
 php artisan key:generate // 產生器來產生APP KEY
 ```
