@@ -1,6 +1,6 @@
 @extends('layouts.user')
 @section('meta')
-<meta name="csrf-token" content="{{ csrf_token() }}">
+<meta name="csrf-token" content="{{ csrf_token() }}">  
 @endsection
 @section('content')
 <div class="container-fluid">
@@ -150,11 +150,10 @@
   </div>
 
 </div>
-<div id="map" class="jumbotron jumbotron-fluid mb-0">
-</div>
+<div id="map" class="jumbotron jumbotron-fluid mb-0" style="z-index: 0;"></div>
 @endsection
 @section('js')
 <script type="text/javascript" src="{{ asset('js/map.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/report.js') }}"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJpUelShEKxbqbPvaF2D8TZNn7lYmYJKs&callback=initMap"></script>
+{{-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJpUelShEKxbqbPvaF2D8TZNn7lYmYJKs&callback=initMap"></script> --}}
 @endsection

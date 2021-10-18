@@ -5,39 +5,42 @@ var arr_info = 1;
 $("#map").css("height" ,map_height);
 
 
-function getInfo(){
-  target_path = 'api/report';
-  $.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  });  
-  $.ajax({
-      url: target_path,
-      type: 'POST',
-      success: function(res) {
-        console.log(res.data.info);
-        arr_info = res.data.info;
-      },
-      error: function(xhr) {
-        alert("系統錯誤，請稍後再試或聯絡網站管理員。");
-        arr_info = [];
-      },
-      async: false
-  });
-}
+// function getInfo(){
+//   target_path = 'api/report';
+//   $.ajaxSetup({
+//     headers: {
+//         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//     }
+//   });  
+//   $.ajax({
+//       url: target_path,
+//       type: 'POST',
+//       success: function(res) {
+//         console.log(res.data.info);
+//         arr_info = res.data.info;
+//       },
+//       error: function(xhr) {
+//         alert("系統錯誤，請稍後再試或聯絡網站管理員。");
+//         arr_info = [];
+//       },
+//       async: false
+//   });
+// }
 
-
-initMap();
 
 function initMap (){
   var kaohsiung = {lat: 22.779533, lng: 120.326927};
+    map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 12,
+      center: kaohsiung
+    });
 
     // 給特定值(擇一使用)
-     map = L.map('map', {
-       attributionControl: false
-    }).setView(kaohsiung, 17);
-    
+     map = L.map('map').setView({
+        lng: 120.3290285, // longitude(經度)
+        lat: 22.7534671, // latitude(緯度)
+    }, 17 // zoom(地圖的縮放，值越大->放大；反之縮小)
+  );
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
@@ -90,21 +93,21 @@ function initMap (){
       var url = new URL(arr_info[i]['link']);
       var dataPage = url.searchParams.get("page");
       
-      // if(dataPage != currentPage){
-      //   var marker = new google.maps.Marker({
-      //     map: map,
-      //     position: myLatlng,
-      //     title: arr_info[i]['name'],
-      //     icon: standardIcon,
-      //   });
-      // }else{
-      //   var marker = new google.maps.Marker({
-      //     map: map,
-      //     position: myLatlng,
-      //     title: arr_info[i]['name'],
-      //     icon: currentIcon,
-      //   });
-      // }
+      if(dataPage != currentPage){
+        var marker = new google.maps.Marker({
+          map: map,
+          position: myLatlng,
+          title: arr_info[i]['name'],
+          icon: standardIcon,
+        });
+      }else{
+        var marker = new google.maps.Marker({
+          map: map,
+          position: myLatlng,
+          title: arr_info[i]['name'],
+          icon: currentIcon,
+        });
+      }
       
       /*
       var infowindow = new google.maps.InfoWindow();
@@ -118,12 +121,12 @@ function initMap (){
       marker.addListener('click', function() {
         infowindow.open(map, marker);
       });*/
-    //   google.maps.event.addListener(marker, 'click', (function(marker,content,infowindow){ 
-    //     return function() {
-    //         infowindow.setContent(content);
-    //         infowindow.open(map,marker);
-    //     };
-    //   })(marker, content, infowindow));  
+      google.maps.event.addListener(marker, 'click', (function(marker,content,infowindow){ 
+        return function() {
+            infowindow.setContent(content);
+            infowindow.open(map,marker);
+        };
+      })(marker, content, infowindow));  
     }
 }
 

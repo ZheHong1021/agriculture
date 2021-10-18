@@ -81,11 +81,11 @@ return [
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', 'DESKTOP-95GTT1R\SQLEXPRESS'),
-            'port' => env('DB_PORT', '1433'),
-            'database' => env('DB_DATABASE', 'agriculture'),
-            'username' => env('DB_USERNAME', 'sa'),
-            'password' => env('DB_PASSWORD', 'haha45La'),
+            'host' => env('DB_HOST', 'DESKTOP-95GTT1R\SQLEXPRESS'),  // MS SQL的伺服器密碼
+            'port' => env('DB_PORT', '1433'), // Port
+            'database' => env('DB_DATABASE', 'agriculture'), // 資料庫名稱
+            'username' => env('DB_USERNAME', 'sa'), // 使用者名稱
+            'password' => env('DB_PASSWORD', 'haha45La'), // 使用者密碼
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
